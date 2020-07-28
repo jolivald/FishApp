@@ -16,8 +16,37 @@ use Symfony\Component\HttpFoundation\File\File;
  * @Vich\Uploadable
  * @ApiResource(
  *   normalizationContext={"groups"={"read:post"}},
- *   collectionOperations={"get"},
- *   itemOperations={"get"}
+ *   itemOperations={"get"},
+ *   collectionOperations={
+ *     "get",
+ *     "post"={
+ *       "controller"=CreatePostAction::class,
+ *       "deserialize"=false,
+ *       "openapi_context"={
+ *         "requestBody"={
+ *            "content"={
+ *              "multipart/form-data"={
+ *                "schema"={
+ *                  "type"="object",
+ *                  "properties"={
+ *                    "firstName"={"type"="string"},
+ *                    "lastName"={"type"="string"},
+ *                    "contents"={"type"="text"},
+ *                    "fishName"={"type"="string"},
+ *                    "fishSize"={"type"="decimal"},
+ *                    "fishWeight"={"type"="decimal"},
+ *                    "fishFile"={
+ *                      "type"="string",
+ *                      "format"="binary"
+ *                    }
+ *                  }
+ *                }
+ *              }
+ *            }
+ *          }
+ *       }
+ *     }
+ *   }
  * )
  */
 class Post
