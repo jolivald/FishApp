@@ -1,4 +1,5 @@
 <?php
+// https://api-platform.com/docs/core/filters/#order-filter-sorting
 
 namespace App\Entity;
 
@@ -7,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
@@ -48,6 +51,8 @@ use Symfony\Component\HttpFoundation\File\File;
  *     }
  *   }
  * )
+ * 
+ * @ApiFilter(OrderFilter::class, properties={"fishSize": "DESC", "fishWeight": "DESC"})
  */
 class Post
 {
