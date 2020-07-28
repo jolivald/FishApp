@@ -8,9 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @Vich\Uploadable
  * @ApiResource(
  *   normalizationContext={"groups"={"read:post"}},
  *   collectionOperations={"get"},
@@ -68,6 +71,12 @@ class Post
      * @Groups({"read:post"})
      */
     private $fishImage;
+
+    /**
+     * @Vich\UploadableField(mapping="fishes", fileNameProperty="fishImage")
+     * @var File|null
+     */
+    private $fishFile;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post", orphanRemoval=true)
@@ -266,5 +275,26 @@ class Post
         $this->updatedBy = $updatedBy;
 
         return $this;
+    }
+
+    /**
+     * Get the value of fishFile
+     *
+     * @return  File|null
+     */ 
+    public function getFishFile()
+    {
+        return $this->fishFile;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setFishFile(?File $imageFile = null): void
+    {
+        $this->fishFile = $imageFile;
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 }
