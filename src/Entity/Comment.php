@@ -4,9 +4,16 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ApiResource(
+ *   normalizationContext={"groups"={"read:comment"}},
+ *   collectionOperations={"get"},
+ *   itemOperations={"get"}
+ * )
  */
 class Comment
 {
@@ -14,26 +21,31 @@ class Comment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read:comment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:comment"})
      */
     private $fistName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:comment"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"read:comment"})
      */
     private $contents;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read:comment"})
      */
     private $createdAt;
 

@@ -6,9 +6,16 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @ApiResource(
+ *   normalizationContext={"groups"={"read:post"}},
+ *   collectionOperations={"get"},
+ *   itemOperations={"get"}
+ * )
  */
 class Post
 {
@@ -16,41 +23,49 @@ class Post
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read:post"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:post"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:post"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"read:post"})
      */
     private $contents;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:post"})
      */
     private $fishName;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @Groups({"read:post"})
      */
     private $fishSize;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @Groups({"read:post"})
      */
     private $fishWeight;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:post"})
      */
     private $fishImage;
 
@@ -58,6 +73,27 @@ class Post
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"read:post"})
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $createdBy;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $updatedBy;
 
     public function __construct()
     {
@@ -180,6 +216,54 @@ class Post
                 $comment->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?string
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(string $createdBy): self
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getUpdatedBy(): ?string
+    {
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(string $updatedBy): self
+    {
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }
