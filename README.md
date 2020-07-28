@@ -32,10 +32,6 @@ Exécuter les migrations:
 
     php bin/console doctrine:migrations:migrate
 
-Installer le maker-bundle:
-
-    composer require symfony/maker-bundle --dev
-
 Créer les controlleurs:
 
-    php bin/console generate:controller 
+    php bin/console make:controller
