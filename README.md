@@ -35,3 +35,7 @@ Exécuter les migrations:
 Créer les controlleurs:
 
     php bin/console make:controller
+
+Exécuter les fixtures:
+
+    php bin/console doctrine:fixtures:load
