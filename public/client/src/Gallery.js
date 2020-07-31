@@ -12,24 +12,26 @@ const Gallery = ({ posts }) => {
     <div>
       <p>
         Trier les publications:&nbsp;
-        <select>
-          <option value="createdAt">Récentes</option>
-          <option value="fishSize">Par taille</option>
-          <option value="fishWeight">Par poids</option>
-        </select>
+        <div className="select is-small">
+          <select>
+            <option value="createdAt">Récentes</option>
+            <option value="fishSize">Par taille</option>
+            <option value="fishWeight">Par poids</option>
+          </select>
+        </div>
       </p>
       {posts.map(post => {
         return (
           <article key={post.id}>
-            <h3>
-              <Link to={'/post/' + post.id}>
+            <h3 className="is-size-2">
+              <Link to={'/post/' + post.id} className="has-text-black">
                 {post.firstName} {post.lastName}
               </Link>
             </h3>
             <p>{post.contents}</p>
             <img src={'http://127.0.0.1:8000/images/fishes/' + post.fishImage} width="250" alt=""/>
             <p>
-              <Link to={'/post/' + post.id}>
+              <Link to={'/post/' + post.id} className="button is-primary">
                 Voir les commentaires
               </Link>
             </p>

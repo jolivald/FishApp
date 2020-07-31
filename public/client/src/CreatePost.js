@@ -23,13 +23,13 @@ const Component = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      <div className="field">
         <input id="firstName" type="text" required placeholder="Prénom"/>
       </div>
-      <div>
+      <div className="field">
         <input id="lastName" type="text" required placeholder="Nom"/>
       </div>
-      <div>
+      <div className="field">
         <label htmlFor="fishName">Espèce: </label>
         <select id="fishName">
           {fishes.map((fishName, i) => (
@@ -37,21 +37,21 @@ const Component = () => {
           ))}
         </select>
       </div>
-      <div>
+      <div className="field">
         <input id="fishSize" type="number" required placeholder="Taille"/>
       </div>
-      <div>
+      <div className="field">
         <input id="fishWeight" type="number" required placeholder="Poids"/>
       </div>
-      <div>
+      <div className="field">
         <label htmlFor="fishImage">Image: </label>
         <input id="fishImage" type="file" required />
       </div>
-      <div>
+      <div className="field">
         <textarea id="contents" required placeholder="Message"></textarea>
       </div>
-      <div>
-        <button>Envoyer</button>
+      <div className="field">
+        <button className="button is-primary">Envoyer</button>
       </div>
     </form>
   );

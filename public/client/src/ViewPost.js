@@ -12,7 +12,7 @@ const ViewPost = ({ posts }) => {
   }
   return (
     <article key={post.id}>
-      <h3>{post.firstName} {post.lastName}</h3>
+      <h3 className="is-size-2">{post.firstName} {post.lastName}</h3>
       <p>{post.contents}</p>
       <img src={'http://127.0.0.1:8000/images/fishes/' + post.fishImage} width="250" alt=""/>
       <dl>
@@ -23,10 +23,12 @@ const ViewPost = ({ posts }) => {
         <dt>Poids:</dt>
         <dd>{post.fishWeight}</dd>
       </dl>
-      <p><Link to={'/add-comment/' + post.id}>Ajouter un commentaire</Link></p>
+      <p><Link to={'/add-comment/' + post.id} className="button is-primary">
+        Ajouter un commentaire
+      </Link></p>
       {post.comments.map((comm, i) => (
         <section key={i}>
-          <h4>{comm.firstName} {comm.lastName}</h4>
+          <h4 className="is-size-3">{comm.firstName} {comm.lastName}</h4>
           <p>{comm.contents}</p>
         </section>
       ))}

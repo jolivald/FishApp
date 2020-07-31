@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import fetch from 'cross-fetch';
+import Navbar from './Navbar';
 import Gallery from './Gallery';
 import ViewPost from './ViewPost';
 import CreatePost from './CreatePost';
@@ -27,16 +28,10 @@ function App() {
     <div className="App">
       <Router>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Galerie</Link>
-              </li>
-              <li>
-                <Link to="/add-post">Poster</Link>
-              </li>
-            </ul>
-          </nav>
+          <header>
+            <Navbar />
+          </header>
+          <main className="mt-4">
           <Switch>
             <Route path="/post/:id">
               <ViewPost posts={posts} />
@@ -54,6 +49,10 @@ function App() {
               <Gallery posts={posts} />
             </Route>
           </Switch>
+          </main>
+          <footer className="mt-4 has-text-centered">
+            <p>&copy; 2020 - Isabelle et Jonathan</p>
+          </footer>
         </div>
       </Router>
     </div>
