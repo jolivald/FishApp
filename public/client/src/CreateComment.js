@@ -1,7 +1,9 @@
 import React from 'react';
 import fetch from 'cross-fetch';
+import { useParams } from 'react-router-dom';
 
 const CreateComment = () => {
+  const { id } = useParams();
   const handleSubmit = event => {
     event.preventDefault();
     const date = new Date();
@@ -10,6 +12,7 @@ const CreateComment = () => {
       acc[input.id] = input.value;
       return acc;
     }, {
+      post: '/api/posts/' + id,
       createdAt: date,
       createdBy: 'api platform',
       updatedAt: date,

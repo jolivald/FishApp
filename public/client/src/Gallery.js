@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Gallery = ({ posts }) => {
-  const [sortedPosts, setSortedPosts] = useState(Array.from(posts));
+  /*const [sortedPosts, setSortedPosts] = useState(Array.from(posts));
   const handleChange = event => {
     const key = event.target.value;
     const sorted = Array.from(sortedPosts).sort((a, b) => a[key] > b[key]);
     setSortedPosts(sorted);
-  };
+  };*/
   return (
     <div>
       <p>
         Trier les publications:&nbsp;
-        <select onChange={handleChange}>
+        <select>
           <option value="createdAt">Récentes</option>
           <option value="fishSize">Par taille</option>
           <option value="fishWeight">Par poids</option>

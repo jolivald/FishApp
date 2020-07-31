@@ -14,7 +14,7 @@ const ViewPost = ({ posts }) => {
     <article key={post.id}>
       <h3>{post.firstName} {post.lastName}</h3>
       <p>{post.contents}</p>
-      <img src={'http://127.0.0.1:8000/images/fishes/' + post.fishImage} width="250"/>
+      <img src={'http://127.0.0.1:8000/images/fishes/' + post.fishImage} width="250" alt=""/>
       <dl>
         <dt>Espèce:</dt>
         <dd>{post.fishName}</dd>
