@@ -39,3 +39,12 @@ Créer les controlleurs:
 Exécuter les fixtures:
 
     php bin/console doctrine:fixtures:load
+
+Lancer le serveur:
+
+    symfony server:start
+
+Lancer le client:
+
+    cd public/client
+    npm start

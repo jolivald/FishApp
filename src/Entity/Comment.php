@@ -10,8 +10,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  * @ApiResource(
- *   normalizationContext={"groups"={"read:comment"}},
- *   collectionOperations={"get"},
+ *   normalizationContext={"groups"={"read:post"}},
+ *   collectionOperations={"get", "post"},
  *   itemOperations={"get"}
  * )
  */
@@ -21,31 +21,31 @@ class Comment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"read:comment"})
+     * @Groups({"read:post"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:comment"})
+     * @Groups({"read:post"})
      */
     private $fistName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:comment"})
+     * @Groups({"read:post"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"read:comment"})
+     * @Groups({"read:post"})
      */
     private $contents;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"read:comment"})
+     * @Groups({"read:post"})
      */
     private $createdAt;
 

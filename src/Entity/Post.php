@@ -4,6 +4,7 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use App\Controller\CreatePostAction;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -114,6 +115,7 @@ class Post
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post", orphanRemoval=true)
+     * @Groups({"read:post"})
      */
     private $comments;
 

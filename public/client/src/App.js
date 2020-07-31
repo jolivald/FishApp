@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import fetch from 'cross-fetch';
+import Gallery from './Gallery';
+import ViewPost from './ViewPost';
+import CreatePost from './CreatePost';
+import CreateComment from './CreateComment';
 
 function App() {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/posts', {
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(posts => setPosts(posts))
+      .catch(err => alert(err));
+  }, []);
   return (
     <div className="App">
       <Router>
@@ -14,25 +30,28 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Galerie</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/users">Users</Link>
+                <Link to="/add-post">Poster</Link>
               </li>
             </ul>
           </nav>
           <Switch>
-            <Route path="/about">
-              <p>about</p>
+            <Route path="/post/:id">
+              <ViewPost posts={posts} />
             </Route>
-            <Route path="/users">
-              <p>users</p>
+            <Route path="/add-post">
+              <CreatePost />
+            </Route>
+            <Route path="/add-comment/:id">
+              <CreateComment />
+            </Route>
+            <Route path="/gallery">
+              <Gallery posts={posts} />
             </Route>
             <Route path="/">
-              <p>home</p>
+              <Gallery posts={posts} />
             </Route>
           </Switch>
         </div>
